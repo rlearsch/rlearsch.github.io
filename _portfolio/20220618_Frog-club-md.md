@@ -1,6 +1,6 @@
 ---
 title: "Frog club"
-excerpt: "Random forest model to predict frog locations <br/><img src='/output_28_0.png'>"
+excerpt: "Random forest model to predict frog locations <br/><img src='/images/frog-club-md/output_28_0.png'>"
 collection: portfolio
 ---
 
@@ -822,7 +822,7 @@ plot_frogs_comparison(bboxs[1], frog_datas[1], model_data,'Kurri Kurri and East 
 
 
     
-![png](output_26_0.png)
+![png](/images/frog-club-md/output_26_0.png)
     
 
 
@@ -863,7 +863,7 @@ plt.show()
 
 
     
-![png](output_28_0.png)
+![png](/images/frog-club-md/output_28_0.png)
     
 
 
@@ -1066,7 +1066,7 @@ plt.show()
 
 
     
-![png](output_45_0.png)
+![png](/images/frog-club-md/output_45_0.png)
     
 
 
@@ -1139,7 +1139,7 @@ plt.show()
 
 
     
-![png](output_49_0.png)
+![png](/images/frog-club-md/output_49_0.png)
     
 
 
@@ -1196,7 +1196,7 @@ plt.show()
 
 
     
-![png](output_57_0.png)
+![png](/images/frog-club-md/output_57_0.png)
     
 
 
@@ -1286,7 +1286,7 @@ for region in test_regions:
 
 
     
-![png](output_63_1.png)
+![png](/images/frog-club-md/output_63_1.png)
     
 
 
@@ -1295,7 +1295,7 @@ for region in test_regions:
 
 
     
-![png](output_63_3.png)
+![png](/images/frog-club-md/output_63_3.png)
     
 
 
@@ -1304,7 +1304,7 @@ for region in test_regions:
 
 
     
-![png](output_63_5.png)
+![png](/images/frog-club-md/output_63_5.png)
     
 
 
@@ -1313,7 +1313,7 @@ for region in test_regions:
 
 
     
-![png](output_63_7.png)
+![png](/images/frog-club-md/output_63_7.png)
     
 
 
@@ -1322,7 +1322,7 @@ for region in test_regions:
 
 
     
-![png](output_63_9.png)
+![png](/images/frog-club-md/output_63_9.png)
     
 
 
