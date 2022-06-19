@@ -1,5 +1,5 @@
 ---
-title: "Frog club"
+title: "Predicting Litoria Fallax from climate data"
 excerpt: "Random forest model to predict frog locations <br/><img src='/images/frog-club-md/output_28_0.png'>"
 collection: portfolio
 ---
