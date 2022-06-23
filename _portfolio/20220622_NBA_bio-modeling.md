@@ -15,7 +15,6 @@ I will follow the paradigm set out by ML lessons:
 
 Refs: [IBM](https://www.ibm.com/downloads/cas/7109RLQM), coursera, 
 
-
 ## Imports and settings
 
 
@@ -29,12 +28,11 @@ import numpy as np
 
 # Machine Learning
 from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import Ridge
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.model_selection import ShuffleSplit
-from sklearn.model_selection import cross_val_score
 
 # Visualization
 import matplotlib.pyplot as plt
@@ -48,7 +46,8 @@ plt.rcParams.update({'font.size': 14,
 def plot_metric_salary(metric, joined_data):
     joined_data_replace_nan = joined_data.fillna(0)
     data = joined_data_replace_nan[joined_data_replace_nan[metric] > 0]
-    plt.scatter(x=data[metric], y=data['Log Salary (M $)'], s=50)
+    plt.scatter(x=data[metric], y=data['Log Salary (M $)'], 
+                s=50, alpha=0.5)
     plt.xlabel(metric)
     plt.ylabel('Log Salary (Millions, $)')
     plt.show()
@@ -441,7 +440,11 @@ plt.ylabel("Frequency")
 plt.xlabel("Salary (Millions, $)")
 plt.fig_size=(11,7)
 plt.subplot(1,2,2)
-plt.hist(player_salary['Salary (Million USD)'], align='right',rwidth=.95,cumulative=True,density=True,)
+plt.hist(player_salary['Salary (Million USD)'], align='right',bins=400,
+                                  cumulative=True,
+                                  density=True,
+                                  histtype='step'
+                                 )
 plt.ylabel("Cumulative probability")
 plt.xlabel("Salary (Millions, $)")
 plt.fig_size=(11,7)
@@ -665,7 +668,12 @@ for count, metric in enumerate(metrics):
     data = joined_data_replace_nan[joined_data_replace_nan[metric] > 0]
     ax[count%len(metrics),0].hist(data[metric],rwidth=.95,)
     ax[count%len(metrics),0].set_xlabel(metric)
-    ax[count%len(metrics),1].hist(data[metric],rwidth=.95,cumulative=True,density=True,)
+    ax[count%len(metrics),1].hist(data[metric],
+                                  bins=400,
+                                  cumulative=True,
+                                  density=True,
+                                  histtype='step'
+                                 )
     ax[count%len(metrics),1].set_xlabel(metric)
 for hist in ax[:,0]:
     hist.set_ylabel('Frequency')
@@ -679,7 +687,7 @@ for CDF in ax[:,1]:
     
 
 
-These are looking pretty Gaussian, but I will have to scale them to make their values and ranges similar.
+These are looking pretty gausian, but I will have to scale them to make their values and ranges similar.
 
 ## Clean data and Feature Engineer
 
@@ -717,7 +725,9 @@ fig, ax = plt.subplots(4,2, figsize=(11*2,7*4))
 for count, metric in enumerate(metrics):
     data = joined_data_replace_nan[joined_data_replace_nan[metric] > 0]
     ax[count//2, count%2].scatter(x=data[metric], 
-                               y=data['Log Salary (M $)'], s=50)
+                               y=data['Log Salary (M $)'],
+                                  s=50,
+                                 alpha=0.5)
     ax[count//2, count%2].set_xlabel(metric)
     ax[count//2, count%2].set_ylabel('Log Salary (Millions, $)')
 
@@ -772,13 +782,17 @@ x_dim = 'Height (in cm)'
 y_dim = 'Wingspan (in cm)'
 plt.scatter(
     x=data[x_dim],
-    y=data[y_dim],)
+    y=data[y_dim],
+    alpha=0.5)
 plt.xlabel(x_dim)
 plt.ylabel(y_dim)
-plt.show()
+
 ```
 
 
+
+
+    Text(0, 0.5, 'Wingspan (in cm)')
 
 
 
@@ -798,6 +812,7 @@ wingspans = no_wingspan_data['Wingspan (in cm)']
 regression = LinearRegression().fit(np.array(heights).reshape(-1,1), np.array(wingspans))
 player_bio_1718['Wingspan predictions (in cm)'] = regression.predict(
     np.array(player_bio_1718['Height (in cm)']).reshape(-1,1))
+
 ```
 
 
@@ -820,7 +835,8 @@ y_dim = 'Wingspan (in cm)'
 plt.scatter(
     x=data[x_dim],
     y=data[y_dim],
-    label='Observations')
+    label='Observations',
+    alpha=0.5)
 plt.scatter(
     x=data[x_dim],
     y=data['Wingspan predictions (in cm)'],
@@ -839,7 +855,7 @@ plt.show()
 
 This is not a great prediction, the $R^2$ score is $0.69$ out of $1.0$.
 
-**The wingspan of the NBA population is more independant of the height of the players than the average population.**
+**The wingspan of the NBA population is more independant of the height of the players than the average population.** I'm not going to use it in my model. Because I'm doing a linear regression this would basically just modify the coefficient on  the height feature already in the data.
 
 #### Create BMI
 Do NBA players have similar BMIs?
@@ -866,7 +882,7 @@ We have some players coming in "overweight" according to BMI (BMI > 25), but, as
 Actually, those guys are some of the higher paid players!
 
 #### Create Hand Area
-I think the surface area of the hand is more closely related to its impact on the game of basketball then either the width or length individually. I'm going to make that into a feature using: $$A = \pi * length * width$$
+I think the surface area of the hand is more closely related to its impact on the game of basketball then either the width or length individually. I'm going to treat that as an elipse and create it as a feature using: $$A = \pi * length * width$$
 
 
 ```python
@@ -1249,7 +1265,7 @@ plot_metric_salary(metric,joined_data)
 
 
 ## Train the model
-Before I do that, I definitely need to drop some columns. I'm going to address the categoricial data (College, Position, Team) in right now in case I want it later.
+Before I do that, I definitely need to drop some columns. I'm going toaddress the categoricial data (College, Position, Team) separately right now in case I want it later.
 
 
 ```python
@@ -1553,6 +1569,10 @@ print('score: '+str(model.score(X,y)))
     score: 0.6153114126697995
     
 
+That's a good score, but how does it predict outside of the training data? 
+
+To answer that, I'm going to fill in the values for the players I removed with the median values for each category.
+
 
 ```python
 training_data_filled = joined_data_dropped.fillna(joined_data_dropped.median())
@@ -1587,7 +1607,8 @@ plt.scatter(
     data=y_filled,
     x=x_dim,
     y=y_dim,
-    label='Observations')
+    label='Observations',
+    alpha=0.5)
 y_dim = 'Predicted Salary (M $)'
 plt.scatter(
     data=y_filled,
@@ -1603,7 +1624,7 @@ plt.show()
 
 
     
-![png](/images/NBA-bio/output_69_0.png)
+![png](/images/NBA-bio/output_70_0.png)
     
 
 
@@ -1611,37 +1632,17 @@ Who is that we predict should be puling in $1B?
 
 
 ```python
-joined_data.iloc[y_filled["Predicted Salary (M $)"].idxmax()]
+joined_data.iloc[y_filled["Predicted Salary (M $)"].idxmax()].head()
 ```
 
 
 
 
-    Player Full Name                 Dirk Nowitzki
-    Birth Date                 1978-06-19 00:00:00
-    Year Start                                1999
-    Year End                                  2018
-    Position                                     F
-    Height (ft 1/2)                              7
-    Height (inches 2/2)                          0
-    Height (in cm)                           213.4
-    Wingspan (in cm)                           NaN
-    Standing Reach (in cm)                     NaN
-    Hand Length (in inches)                    NaN
-    Hand Width (in inches)                     NaN
-    Weight (in lb)                             245
-    Body Fat (%)                               NaN
-    College                                    NaN
-    Player                           Dirk Nowitzki
-    Unnamed: 0                                 201
-    Tm                                         DAL
-    season17_18                              5e+06
-    Salary (Million USD)                         5
-    Log Salary (M $)                       0.69897
-    BMI                                    24.4543
-    Hand Area (inches^2)                       NaN
-    Age                                         40
-    Years in the league                         19
+    Player Full Name          Dirk Nowitzki
+    Birth Date          1978-06-19 00:00:00
+    Year Start                         1999
+    Year End                           2018
+    Position                              F
     Name: 105, dtype: object
 
 
@@ -1656,7 +1657,6 @@ So maybe the Mavs were getting a deal! **Or maybe the model is flawed.**
 ```python
 columns_with_na =[]
 for column in joined_data_dropped.columns:
-    #print(column, np.sum(joined_data_dropped[column].isna()))
     if np.sum(joined_data_dropped[column].isna()):
         columns_with_na.append(column)
 ```
@@ -1802,41 +1802,40 @@ y = training_data_intact_cols[['Log Salary (M $)']]
 
 
 ```python
-model = make_pipeline(StandardScaler(), PolynomialFeatures(3, include_bias=False), LinearRegression())
-model.fit(X,y)
-cv = ShuffleSplit(n_splits=5, test_size=0.2, random_state=0)
-np.mean(cross_val_score(model, X, y, cv=cv))
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=42)
+score_list =[]
+degrees = list(range(1,5))
+for degree in degrees:
+    model = make_pipeline(StandardScaler(), PolynomialFeatures(degree, include_bias=False), Ridge()) 
+    model.fit(X_train,y_train)
+    train_score = model.score(X_train, y_train)
+    test_score = model.score(X_test, y_test)
+    score_list.append([train_score, test_score])
 ```
 
 
-
-
-    0.42616838460075873
-
-
-
-
 ```python
-model = make_pipeline(StandardScaler(), PolynomialFeatures(2, include_bias=False), LinearRegression())
-model.fit(X,y)
-
-cv = ShuffleSplit(n_splits=5, test_size=0.2, random_state=0)
-np.mean(cross_val_score(model, X, y, cv=cv))
+plt.plot(degrees, score_list, marker='o')
+plt.legend(['Training data','Testing data'])
+plt.xlabel('Polynominal degree')
+plt.ylabel('R^2 score')
+plt.show()
 ```
 
 
+    
+![png](/images/NBA-bio/output_86_0.png)
+    
 
 
-    0.4519833642191813
+Polynominal degree of 2 has a sligtly higher score on the testing data - above 2 we begin overfitting. This is a  high variance error. We will use degree 2 for the following predictions.
 
-
-
-Becuase the test/train split scores are lower with polynominal degree of 3, I conclude that is causing overfitting. I know that 0.45 is a pretty medicore $R^2$ score, but it's the best I could do. Let's see what my salary would be!
-
-### Predicitions
+### Predicitions/Production
 
 
 ```python
+model = make_pipeline(StandardScaler(), PolynomialFeatures(2, include_bias=False), Ridge()) 
+model.fit(X,y) #train on the full dataset
 model.feature_names_in_
 ```
 
@@ -1911,11 +1910,11 @@ RWL_salary[0][0]
 
 
 
-    1.213584732487101
+    1.0938939170193462
 
 
 
-So, a fair salary for me would be $1,200,000 a year. 
+So, a fair salary for me would be $1,090,000 a year. 
 
 Coach Ham, I already live in LA. My application is in the mail!
 
@@ -1957,7 +1956,7 @@ plt.show()
 
 
     
-![png](/images/NBA-bio/output_93_0.png)
+![png](/images/NBA-bio/output_94_0.png)
     
 
 
@@ -1982,7 +1981,6 @@ plt.scatter(
     alpha=0.5,)
 plt.xlabel(x_dim)
 plt.ylabel(y_dim)
-#plt.fig_size=(11,7)
 plt.title('Predictions with all biometrics')
 plt.ylim([0,1100])
 plt.legend()
@@ -2005,14 +2003,13 @@ plt.xlabel(x_dim)
 plt.ylabel(y_dim)
 plt.ylim([0,1100])
 plt.title('Predictions with height, weight, age, and years')
-#plt.fig_size=(11,7)
 plt.legend()
 plt.show()
 ```
 
 
     
-![png](/images/NBA-bio/output_94_0.png)
+![png](/images/NBA-bio/output_95_0.png)
     
 
 
@@ -2026,9 +2023,9 @@ Or, why am worth more than minimum wage for an NBA player?
 coef_df = pd.DataFrame(
     zip(
     list(model['polynomialfeatures'].get_feature_names_out(model.feature_names_in_)),
-    list(model['linearregression'].coef_,)[0]), columns=['Category','Coefficient']
+    list(model['ridge'].coef_,)[0]), columns=['Category','Coefficient']
 )
-coef_df.insert(2,'Magntitute of coef',np.abs(model['linearregression'].coef_,)[0])
+coef_df.insert(2,'Magntitute of coef',np.abs(model['ridge'].coef_,)[0])
 coef_df.sort_values(by=['Magntitute of coef'],ascending=False)
 ```
 
@@ -2062,86 +2059,86 @@ coef_df.sort_values(by=['Magntitute of coef'],ascending=False)
     <tr>
       <th>3</th>
       <td>Years in the league</td>
-      <td>0.611955</td>
-      <td>0.611955</td>
+      <td>0.579669</td>
+      <td>0.579669</td>
     </tr>
     <tr>
       <th>12</th>
       <td>Age Years in the league</td>
-      <td>-0.480396</td>
-      <td>0.480396</td>
+      <td>-0.393072</td>
+      <td>0.393072</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Age</td>
-      <td>-0.274165</td>
-      <td>0.274165</td>
+      <td>-0.244206</td>
+      <td>0.244206</td>
     </tr>
     <tr>
       <th>11</th>
       <td>Age^2</td>
-      <td>0.184503</td>
-      <td>0.184503</td>
+      <td>0.140130</td>
+      <td>0.140130</td>
     </tr>
     <tr>
       <th>13</th>
       <td>Years in the league^2</td>
-      <td>0.118761</td>
-      <td>0.118761</td>
+      <td>0.077877</td>
+      <td>0.077877</td>
     </tr>
     <tr>
       <th>0</th>
       <td>Height (in cm)</td>
-      <td>0.046181</td>
-      <td>0.046181</td>
+      <td>0.048072</td>
+      <td>0.048072</td>
     </tr>
     <tr>
       <th>6</th>
       <td>Height (in cm) Age</td>
-      <td>0.042721</td>
-      <td>0.042721</td>
+      <td>0.044353</td>
+      <td>0.044353</td>
     </tr>
     <tr>
       <th>7</th>
       <td>Height (in cm) Years in the league</td>
-      <td>-0.031671</td>
-      <td>0.031671</td>
+      <td>-0.034242</td>
+      <td>0.034242</td>
     </tr>
     <tr>
       <th>5</th>
       <td>Height (in cm) Weight (in lb)</td>
-      <td>0.028091</td>
-      <td>0.028091</td>
+      <td>0.026550</td>
+      <td>0.026550</td>
     </tr>
     <tr>
       <th>9</th>
       <td>Weight (in lb) Age</td>
-      <td>0.023829</td>
-      <td>0.023829</td>
+      <td>0.021481</td>
+      <td>0.021481</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Height (in cm)^2</td>
-      <td>-0.020076</td>
-      <td>0.020076</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>Weight (in lb) Years in the league</td>
-      <td>-0.019643</td>
-      <td>0.019643</td>
+      <td>-0.019526</td>
+      <td>0.019526</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Weight (in lb)</td>
-      <td>-0.017419</td>
-      <td>0.017419</td>
+      <td>-0.017313</td>
+      <td>0.017313</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Weight (in lb) Years in the league</td>
+      <td>-0.016464</td>
+      <td>0.016464</td>
     </tr>
     <tr>
       <th>8</th>
       <td>Weight (in lb)^2</td>
-      <td>-0.005985</td>
-      <td>0.005985</td>
+      <td>-0.003941</td>
+      <td>0.003941</td>
     </tr>
   </tbody>
 </table>
@@ -2151,13 +2148,13 @@ coef_df.sort_values(by=['Magntitute of coef'],ascending=False)
 
 I really like this analysis becuase it finds that **age and years in the league are more important than height or weight.** 
 
-Not only that, but the quatratic features of $Age^2$ and $years^2$ match my intuition and represent two different cases of high salary:
+Not only that, but the quatratic features of Age$^2$ and years$^2$ match my intuition and represent two different cases of high salary:
 
 Young players have high potential: teams are eager to get young, talented players, and incentivize them with high salaries.  
 
-Players with more years in the league are more experienced and known quantities, which is valuable in a different way.
+Players with more years in the league are more experienced and known quantities, which is valuable in a different way. There could also be some surviorship basis at play here: Perhaps only the good (valuable) players play for many years. In that case, they are valuable for another reason (high skill), which correlates with years in the league.
 
-$Age^2$ has a positive coeficient with high magntidue, because there players at **both** ends of that parabola are valuable. I draw a similar conclusion from the high magnitude, positive coefficeint on $years^2$
+Age$^2$ has a positive coeficient with high magntidue, because there players at **both** ends of that parabola are valuable. I draw a similar conclusion from the high magnitude, positive coefficeint on years$^2$
 
 
 ```python
@@ -2166,9 +2163,12 @@ X.update(X_uniform)
 scaled_X=model['standardscaler'].transform(X)
 scaled_age = scaled_X[:,2]
 scaled_years=scaled_X[:,3]
-age_salary = scaled_age*(-0.274)+(scaled_age**2)*(0.1845)
-years_salary =scaled_years*(0.6119)+(scaled_years**2)*(0.11876)
-
+age_coef, age2_coef = (np.array(coef_df.loc[coef_df['Category']=='Age','Coefficient']), 
+                       np.array(coef_df.loc[coef_df['Category']=='Age^2','Coefficient']))
+age_salary = scaled_age*(age_coef)+(scaled_age**2)*(age2_coef)
+years_coef, years2_coef =  (np.array(coef_df.loc[coef_df['Category']=='Years in the league','Coefficient']), 
+                            np.array(coef_df.loc[coef_df['Category']=='Years in the league^2','Coefficient']))
+years_salary =scaled_years*(years_coef)+(scaled_years**2)*(years2_coef)
 ```
 
 
@@ -2182,6 +2182,7 @@ plt.scatter(
     x=x_dim,
     y=y_dim,
     label='Observations',
+    alpha=0.5,
 )
 plt.plot(X_uniform['Age'],10**age_salary,
         label="Contribution from age only",
@@ -2198,6 +2199,8 @@ plt.scatter(
     x=x_dim,
     y=y_dim,
     label='Observations',
+    alpha=0.5,
+
 )
 plt.plot(X_uniform['Years in the league'],10**years_salary,
         label="Contribution from years only",
@@ -2211,7 +2214,7 @@ plt.show()
 
 
     
-![png](/images/NBA-bio/output_100_0.png)
+![png](/images/NBA-bio/output_101_0.png)
     
 
 
@@ -2224,7 +2227,8 @@ X.update(X_uniform)
 scaled_X=model['standardscaler'].transform(X)
 scaled_age = scaled_X[:,2]
 scaled_years=scaled_X[:,3]
-age_years_salary = scaled_age*(-0.274)+(scaled_age**2)*(0.1845)+(scaled_age*scaled_years)*(-0.4804)
+age_years_coef = np.array(coef_df.loc[coef_df['Category']=='Age Years in the league','Coefficient'])
+age_years_salary = scaled_age*(age_coef)+(scaled_age**2)*(age2_coef)+(scaled_age*scaled_years)*(age_years_coef)
 x_dim='Age'
 y_dim='Salary (Million USD)'
 plt.scatter(
@@ -2232,6 +2236,7 @@ plt.scatter(
     x=x_dim,
     y=y_dim,
     label='Observations',
+    alpha=0.5
 )
 plt.plot(X_uniform['Age'],10**age_years_salary,
         label="Contribution from age and years",
@@ -2245,8 +2250,8 @@ plt.show()
 
 
     
-![png](/images/NBA-bio/output_102_0.png)
+![png](/images/NBA-bio/output_103_0.png)
     
 
 
-The little bump centered around 23 years old is showing that NBA salaries are rewarding the rare combination of low age and high experience. After an age of about 28, the negatives of age overtake the benefits of experience.
+The little bump centered around 23 years old is showing that NBA salaries are rewarding the rare combination of low age and high experience. After an age of about 28, the negatives of age overtakes benefit from experience.
