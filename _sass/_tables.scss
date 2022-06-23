@@ -9,6 +9,7 @@ table {
   font-size: $type-size-6;
   border-collapse: collapse;
   border: 1px solid $light-gray;
+  overflow-x: auto; /* add scroll bar? */
 
   & + table {
     margin-top: 1em;
