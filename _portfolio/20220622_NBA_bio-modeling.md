@@ -434,11 +434,7 @@ player_bio_1718.head()
 
 ```python
 player_salary['Salary (Million USD)'] = player_salary['season17_18']/1000000
-#iq_hist = iqplot.histogram(data=player_salary,q='Salary (Million USD)', title='Histogram')
-#iq_ecdf = iqplot.ecdf(data=player_salary,q='Salary (Million USD)',title='ECDF')
-#bokeh.io.show(bokeh.layouts.gridplot([iq_hist, iq_ecdf], ncols=2))
 fig, ax = plt.subplots(1,2, figsize=(11*2,7))
-#fig, ax = plt.subplots(1,2)# figsize=(11,7))
 plt.subplot(1,2,1)
 plt.hist(player_salary['Salary (Million USD)'], align='right',rwidth=.95,)
 plt.ylabel("Frequency")
@@ -805,9 +801,6 @@ wingspans = no_wingspan_data['Wingspan (in cm)']
 regression = LinearRegression().fit(np.array(heights).reshape(-1,1), np.array(wingspans))
 player_bio_1718['Wingspan predictions (in cm)'] = regression.predict(
     np.array(player_bio_1718['Height (in cm)']).reshape(-1,1))
-#predictions = regression.predict(np.array(heights).reshape(-1,1))
-#no_wingspan_data['Wingspan predictions (in cm)'] = predictions
-
 ```
 
 
@@ -1429,7 +1422,6 @@ Let's start with 1, and see how they all compare
 
 ```python
 training_data_intact_rows = joined_data_dropped.dropna()
-#training_data_intact_rows=training_data_intact_rows.drop(columns=['Wingspan predictions (in cm)']) #because we are using real wingspan data
 training_data_intact_rows.head()
 ```
 
