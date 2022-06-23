@@ -5,7 +5,7 @@ collection: portfolio
 ---
 # Predicting NBA salary from biological stats.
 I will follow the paradigm set out by ML lessons:
-1. Find data sources (check! thanks Kaggle)
+1. Find data sources
 1. Explore and visualize the data
 1. Clean data, 
 1. Feature engineer
@@ -13,7 +13,7 @@ I will follow the paradigm set out by ML lessons:
 1. Train models
 1. Deploy best model.
 
-Refs: https://www.ibm.com/downloads/cas/7109RLQM, coursera, 
+Refs: [IBM](https://www.ibm.com/downloads/cas/7109RLQM), coursera, 
 
 
 ## Imports and settings
@@ -132,7 +132,7 @@ player_salary.tail()
 
 
 
-From https://www.statista.com/statistics/1009569/minimum-nba-salary/, the minimum salary is $815615. So let's elminate anyone with a salary below that. I'm not sure how they snuck in there!
+From [statista](https://www.statista.com/statistics/1009569/minimum-nba-salary/), the minimum salary is $815615. So let's elminate anyone with a salary below that. I'm not sure how they snuck in there!
 
 
 ```python
@@ -283,7 +283,7 @@ player_bio_stats.head()
 I want to limit my predictor data to match my salary data: Players active in 2017-2018 season\
 From the first entry, A. C. Green, I can understand the convention for this dataset. A. C. Green's first season was the 1985-1986 season and his last season was the 2000-2001 season. So the `Year Start` and `Year End` columns use the later year of the season.
 
-(Note, that's a super long career A. C.! https://en.wikipedia.org/wiki/A._C._Green)
+(Note, that's a super long career [A. C.](https://en.wikipedia.org/wiki/A._C._Green)!
 
 
 ```python
@@ -675,11 +675,11 @@ for CDF in ax[:,1]:
 
 
     
-![png](output_20_0.png)
+![png](/images/NBA-bio/output_20_0.png)
     
 
 
-These are looking pretty gausian, but I will have to scale them to make their values and ranges similar.
+These are looking pretty Gaussian, but I will have to scale them to make their values and ranges similar.
 
 ## Clean data and Feature Engineer
 
@@ -731,7 +731,7 @@ for count, metric in enumerate(metrics):
 
 These are looking generally pretty uniform, meaning salary is independant of most of these features.
 
-There some data points at the extermes that stick out. Let's proceed.
+There some data points at the extermes that stick out. Let's keep going - maybe we can add some more predictive features.
 
 ### Create Features
 
@@ -775,13 +775,10 @@ plt.scatter(
     y=data[y_dim],)
 plt.xlabel(x_dim)
 plt.ylabel(y_dim)
-
+plt.show()
 ```
 
 
-
-
-    Text(0, 0.5, 'Wingspan (in cm)')
 
 
 
@@ -847,7 +844,7 @@ This is not a great prediction, the $R^2$ score is $0.69$ out of $1.0$.
 #### Create BMI
 Do NBA players have similar BMIs?
 $$BMI = \frac{mass (kg)}{(height (m))^2}$$
-Typically this measurement is not useful for atheletes because it does not distinguish fat weight from muscle weight. [Note](https://www.diabetes.ca/managing-my-diabetes/tools---resources/body-mass-index-(bmi)-calculator). 
+Typically this measurement is not useful for atheletes because it does not distinguish fat weight from muscle weight. [Note on BMI](https://www.diabetes.ca/managing-my-diabetes/tools---resources/body-mass-index-(bmi)-calculator). 
 
 We have height in cm and mass in pounds, so to convert it I will use the formula:
 $$BMI = \frac{mass (lbs) / 2.2}{(height (cm)/100)^2}$$
@@ -885,7 +882,7 @@ plot_metric_salary(metric,joined_data)
 
 
 #### Create Age
-I will use the birthdate column to calculate the age of the player in the 2017-2018 season. This season ended on May 31st, so I will take their age on June 1st. 
+I will use the birthdate column to calculate the age of the player in the 2017-2018 season.
 
 
 ```python
@@ -1042,9 +1039,7 @@ joined_data[joined_data.Age > 45]
 
 
 
-These are former pros with sons in the league with their same name. Per wikipedia, the biological stats for Larry Nance, and Tim Hardaway, match more closely to the **Juniors** (except for Birth Date), so I'm going to update the Birth Dates and recalculate the ages
-
-https://en.wikipedia.org/wiki/Larry_Nance_Jr., https://en.wikipedia.org/wiki/Tim_Hardaway_Jr.,
+These are former pros with sons in the league with their same name. Per wikipedia, the biological stats for [Larry Nance](https://en.wikipedia.org/wiki/Larry_Nance_Jr), and [Tim Hardaway](https://en.wikipedia.org/wiki/Tim_Hardaway_Jr), match more closely to the **Juniors** (except for Birth Date), so I'm going to update the Birth Dates and recalculate the ages
 
 
 ```python
@@ -1254,7 +1249,7 @@ plot_metric_salary(metric,joined_data)
 
 
 ## Train the model
-Before I do that, I definitely need to drop some columns. I'm going to leave categoricial data (College, Position, Team) in right now in case I want it later.
+Before I do that, I definitely need to drop some columns. I'm going to address the categoricial data (College, Position, Team) in right now in case I want it later.
 
 
 ```python
@@ -1411,10 +1406,7 @@ joined_data_dropped.head()
 ### Options for Nans
 1. Work on dataset of only intact rows
 1. Work on dataset of only intact columns
-1. Replace nan with 
-    - mean, 
-    - mode, 
-    - or median
+1. Replace nan with median
 
 #### Work on dataset with only intact rows
 Let's start with 1, and see how they all compare
@@ -2257,4 +2249,4 @@ plt.show()
     
 
 
-The little bump centered around 23 years old is showing that NBA salaries are rewarding the rare combination of low age and high experience. After an age of about 28, the negatives of age overtakes benefit from experience.
+The little bump centered around 23 years old is showing that NBA salaries are rewarding the rare combination of low age and high experience. After an age of about 28, the negatives of age overtake the benefits of experience.
