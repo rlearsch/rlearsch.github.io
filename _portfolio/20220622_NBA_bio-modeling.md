@@ -687,7 +687,7 @@ for CDF in ax[:,1]:
     
 
 
-These are looking pretty gausian, but I will have to scale them to make their values and ranges similar.
+These are looking pretty Gaussian, but I will have to scale them to make their values and ranges similar.
 
 ## Clean data and Feature Engineer
 
@@ -739,9 +739,9 @@ for count, metric in enumerate(metrics):
     
 
 
-These are looking generally pretty uniform, meaning salary is independant of most of these features.
+These are looking generally pretty uniform, meaning salary is independent of most of these features.
 
-There some data points at the extermes that stick out. Let's keep going - maybe we can add some more predictive features.
+There some data points at the extremes that stick out. Let's keep going - maybe we can add some more predictive features.
 
 ### Create Features
 
@@ -855,12 +855,12 @@ plt.show()
 
 This is not a great prediction, the $R^2$ score is $0.69$ out of $1.0$.
 
-**The wingspan of the NBA population is more independant of the height of the players than the average population.** I'm not going to use it in my model. Because I'm doing a linear regression this would basically just modify the coefficient on  the height feature already in the data.
+**The wingspan of the NBA population is more independent of the height of the players than the average population.** I'm not going to use it in my model. Because I'm doing a linear regression this would basically just modify the coefficient on  the height feature already in the data.
 
 #### Create BMI
 Do NBA players have similar BMIs?
 $$BMI = \frac{mass (kg)}{(height (m))^2}$$
-Typically this measurement is not useful for atheletes because it does not distinguish fat weight from muscle weight. [Note on BMI](https://www.diabetes.ca/managing-my-diabetes/tools---resources/body-mass-index-(bmi)-calculator). 
+Typically this measurement is not useful for athletes because it does not distinguish fat weight from muscle weight. [Note on BMI](https://www.diabetes.ca/managing-my-diabetes/tools---resources/body-mass-index-(bmi)-calculator). 
 
 We have height in cm and mass in pounds, so to convert it I will use the formula:
 $$BMI = \frac{mass (lbs) / 2.2}{(height (cm)/100)^2}$$
@@ -882,7 +882,7 @@ We have some players coming in "overweight" according to BMI (BMI > 25), but, as
 Actually, those guys are some of the higher paid players!
 
 #### Create Hand Area
-I think the surface area of the hand is more closely related to its impact on the game of basketball then either the width or length individually. I'm going to treat that as an elipse and create it as a feature using: $$A = \pi * length * width$$
+I think the surface area of the hand is more closely related to its impact on the game of basketball then either the width or length individually. I'm going to treat that as an ellipse and create it as a feature using: $$A = \pi * length * width$$
 
 
 ```python
@@ -1265,7 +1265,7 @@ plot_metric_salary(metric,joined_data)
 
 
 ## Train the model
-Before I do that, I definitely need to drop some columns. I'm going toaddress the categoricial data (College, Position, Team) separately right now in case I want it later.
+Before I do that, I definitely need to drop some columns. I'm going to address the categorical data (College, Position, Team) separately right now in case I want it later.
 
 
 ```python
@@ -1788,9 +1788,9 @@ print('score: '+str(model.score(X,y)))
 ### Test/train split
 
 ### Preprocessing
-I'm going to try some polynominal features here on the "intact columns" dataset. 
+I'm going to try some polynomial features here on the "intact columns" dataset. 
 
-I'm choosing that because many of the features I added are multiplicative of one another, so adding polynominal features will only amplify this. 
+I'm choosing that because many of the features I added are multiplicative of one another, so adding polynomial features will only amplify this. 
 
 I'm also choosing to drop BMI for the same reason: it's a product of height and weight.
 
@@ -1828,7 +1828,7 @@ plt.show()
     
 
 
-Polynominal degree of 2 has a sligtly higher score on the testing data - above 2 we begin overfitting. This is a  high variance error. We will use degree 2 for the following predictions.
+Polynomial degree of 2 has a slightly higher score on the testing data - above 2 we begin overfitting. This is a  high variance error. We will use degree 2 for the following predictions.
 
 ### Predicitions/Production
 
@@ -2146,15 +2146,15 @@ coef_df.sort_values(by=['Magntitute of coef'],ascending=False)
 
 
 
-I really like this analysis becuase it finds that **age and years in the league are more important than height or weight.** 
+I really like this analysis because it finds that **age and years in the league are more important than height or weight.** 
 
-Not only that, but the quatratic features of Age$^2$ and years$^2$ match my intuition and represent two different cases of high salary:
+Not only that, but the quadratic features of Age$^2$ and years$^2$ match my intuition and represent two different cases of high salary:
 
 Young players have high potential: teams are eager to get young, talented players, and incentivize them with high salaries.  
 
-Players with more years in the league are more experienced and known quantities, which is valuable in a different way. There could also be some surviorship basis at play here: Perhaps only the good (valuable) players play for many years. In that case, they are valuable for another reason (high skill), which correlates with years in the league.
+Players with more years in the league are more experienced and known quantities, which is valuable in a different way. There could also be some survivorship basis at play here: Perhaps only the good (valuable) players play for many years. In that case, they are valuable for another reason (high skill), which correlates with years in the league.
 
-Age$^2$ has a positive coeficient with high magntidue, because there players at **both** ends of that parabola are valuable. I draw a similar conclusion from the high magnitude, positive coefficeint on years$^2$
+Age$^2$ has a positive coefficient with high magnitude, because there players at **both** ends of that parabola are valuable. I draw a similar conclusion from the high magnitude, positive coefficient on years$^2$
 
 
 ```python
@@ -2218,7 +2218,7 @@ plt.show()
     
 
 
-This calcuation neglected the cross term of $age*years$. Let's include it and re-evaluate.
+This calculation neglected the cross term of $age*years$. Let's include it and re-evaluate.
 
 
 ```python

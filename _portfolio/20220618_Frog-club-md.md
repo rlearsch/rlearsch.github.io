@@ -4,7 +4,7 @@ excerpt: "Random forest model to predict frog locations <br/><img src='/images/f
 collection: portfolio
 ---
 
-# Import packages and initalize
+# Import packages and initialize
 
 
 ```python
@@ -106,7 +106,7 @@ def get_frogs(file, year_range=None, bbox=None):
     return frogs
 ```
 
-Here we have modified the list of bboxs to contain the 5 from the submission file and four additional regions from other climates across Austrailia. 
+Here we have modified the list of bboxs to contain the 5 from the submission file and four additional regions from other climates across Australia. 
 
 
 ```python
@@ -827,7 +827,7 @@ plot_frogs_comparison(bboxs[1], frog_datas[1], model_data,'Kurri Kurri and East 
 
 
 ## Climate data
-We chose to keep the climate data grouped by month to preserve the seasonal variations in our measures of maximum temperature, minimum temperature, preciptation, and soil moisture.  
+We chose to keep the climate data grouped by month to preserve the seasonal variations in our measures of maximum temperature, minimum temperature, precipitation, and soil moisture.  
 
 
 ```python
@@ -1359,7 +1359,7 @@ submission = (
 
 ```
 
-What we are left with is a submission file with three columns: decimalLatitude, decimalLongitude, and occurrenceStatus. This is the file you will submit to the EY Data Science Challenge platform to receive your score on the leaderboard.
+What we are left with is a submission file with three columns: `decimalLatitude`, `decimalLongitude`, and `occurrenceStatus`. This is the file you will submit to the EY Data Science Challenge platform to receive your score on the leaderboard.
 
 
 ```python
