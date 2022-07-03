@@ -1,3 +1,4 @@
+<!----
 ---
 title: "Portfolio item number 2"
 excerpt: "Short description of portfolio item number 2 <br/><img src='/images/500x300.png'>"
@@ -9,3 +10,6 @@ This is an item in your portfolio. It can be have images or nice text. If you na
 2022/06/22
 Changed extension so that this would not get parsed as a portfolio item :)
 It was an .html
+2022/07/03 
+That didnt work. Commenting everything out
+--->

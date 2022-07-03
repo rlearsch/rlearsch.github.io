@@ -1,6 +1,6 @@
 ---
-title: "Modeling NBA salary with biological features"
-excerpt: "Predicting salary without any performance statistics is really hard.  <br/><img src='/images/nba/dirk_pointing.jpg' width='533' height='300'>"
+title: "Modeling NBA salary with bio-metric features"
+excerpt: "A linear regresion model to predict NBA salary. Or, predicting salary without any performance data is really hard.  <br/><img src='/images/nba/dirk_pointing.jpg' width='533' height='300'>"
 collection: portfolio
 ---
 # Predicting NBA salary from biological stats.

@@ -1,8 +1,18 @@
 ---
 title: "Predicting Litoria Fallax from climate data"
-excerpt: "Random forest model to predict frog locations <br/><img src='/images/frog-club-md/output_28_0.png'>"
+excerpt: "Species distribution model based on a random forest. This uses climate information to predict frog locations. We submitted this to the EY Better Working World data science challenge and finished as a <b>global semifinalist</b> (top 15 of 8000). <br/><img src='/images/frog-club-md/Litoria_fallax.jpg'>"
 collection: portfolio
 ---
+
+# Introduction
+A species distribution model is a specific type of machine learning model that aims to predict the distribution of a biological species across geographic space and time. Such models have become increasingly important in conservation efforts globally to better understand and map the habitats of species of interest, particularly threatened or endangered species.  
+
+![jpg](/images/frog-club-md/Litoria_fallax.jpg)  
+
+The frog species identified for this challenge is Litoria fallax, the eastern dwarf tree frog pictured below. In addition to assisting our understanding of this specific frog species, a successful frog SDM will have broader implications in quantifying biodiversity. This is because frogs are incredibly sensitive to environmental changes, so any changes in their species distribution may indicate an underlying change to biodiversity in the area. 
+
+This challenge was restricted to regions in Australia at coarse resolution (4kmx4km), predicting one species against the rest of the 5 specified Australian species using only [TerraClimate](https://planetarycomputer.microsoft.com/dataset/terraclimate) predictor variables.
+
 
 # Import packages and initialize
 
