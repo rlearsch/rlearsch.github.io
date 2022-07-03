@@ -1,10 +1,12 @@
 ---
 title: "Predicting Litoria Fallax from climate data"
-excerpt: "Species distribution model based on a random forest. This uses climate information to predict frog locations. We submitted this to the EY Better Working World data science challenge and finished as a <b>global semifinalist</b> (top 15 of 8000). <br/><img src='/images/frog-club-md/Litoria_fallax.jpg'>"
+excerpt: "Species distribution model based on a random forest. This uses climate information to predict frog locations. This was a team project; we submitted this to the EY Better Working World data science challenge and finished as a <b>global semifinalist</b> (top 15 of 8000). <br/><img src='/images/frog-club-md/Litoria_fallax_LX.png' width='420' height='300'>"
 collection: portfolio
 ---
 
 # Introduction
+This was a team-based project. I worked with the talented [Lealia Xiong](https://lealiaxiong.github.io/), who will upload her own version of this document as well. We both contributed to the code and text below. The [drawing of the frog](/images/frog-club-md/Litoria_fallax_LX.png) on the portfolio page is her own.
+
 A species distribution model is a specific type of machine learning model that aims to predict the distribution of a biological species across geographic space and time. Such models have become increasingly important in conservation efforts globally to better understand and map the habitats of species of interest, particularly threatened or endangered species.  
 
 ![jpg](/images/frog-club-md/Litoria_fallax.jpg)  
