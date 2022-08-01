@@ -13,7 +13,6 @@ Education
 ======
 * Ph.D in Materials Science, California Institute of Technology, 2022 (expected)
     * Thesis: Fluid properties of polymer solutions under elongational flow and their importance in safety and agricultural applications
-* M.S. in Materials Science, California Institute of Technology, 2020
 * M.S. in Materials Science and Engineering, Colorado University, Boulder, 2017
 * S.B. in Materials Science and Engineering, Massachusetts Institute of Technology, 2015
     * Minor in Mechanical Enginering
