@@ -3,7 +3,6 @@ title: "Dripping onto substrate extensional rheometry (DoSER) tools"
 excerpt: "A complete Python package for analysis of polymer solutions via DoSER.  <br/><img src='/images/doser/DOS_photo.jpg' width='533' height='300'>"
 collection: polymer
 ---
-
 # dosertools
 
 dosertools is a Python package for analyzing dripping-onto-substrate extensional rheology (DoSER) videos.\
