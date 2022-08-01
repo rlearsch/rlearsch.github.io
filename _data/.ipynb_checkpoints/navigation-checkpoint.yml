@@ -1,6 +1,9 @@
 # main links links
 main:
-  - title: "Portfolio"
+  - title: "Polymer Science"
+    url: /polymer/
+    
+  - title: "Data Science"
     url: /portfolio/
     
   - title: "Publications"
