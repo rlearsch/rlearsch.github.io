@@ -1,3 +1,8 @@
+---
+title: "Predicting peptide-protein binding with a random forest"
+excerpt: "General protein-peptide affinity predicted from biochemical features.  <br/><img src='/images/protein-peptide/thumbnail.png' width='533' height='300'>"
+collection: portfolio
+---
 ## Intro
 TDC-2 introduces the Protein-Peptide Binding Affinity prediction task. The predictive, non-generative task is to learn a model estimating a function of a protein, peptide, antigen processing pathway, biological context, and interaction features. It outputs a binding affinity value or binary label indicating strong or weak binding. The binary label can also include additional biomarkers, such as allowing for a positive label if and only if the binding interaction is specific.
 To account for additional biomarkers beyond binding affinity value, our task is specified with a binary label.
