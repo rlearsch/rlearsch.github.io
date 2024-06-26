@@ -1,6 +1,6 @@
 ---
 title: "Predicting peptide-protein binding with a random forest"
-excerpt: "General protein-peptide affinity predicted from biochemical features.  <br/><img src='/images/protein-peptide/thumbnail.png' width='533' height='300'>"
+excerpt: "General protein-peptide affinity predicted from biochemical features.  <br/><img src='/images/protein-peptide/thumbnail.PNG' width='533' height='300'>"
 collection: portfolio
 ---
 ## Intro
@@ -11,7 +11,7 @@ TDC-2 provides datasets and benchmarks for a generalized protein-peptide binding
 X: protein, peptide, antigen processing pathway, biological context, and interaction features
 
 y:  binding affinity value or binary label indicating strong or weak binding
-
+https://rlearsch.github.io/images/protein-peptide/thumbnail.png
 
 1. Find data sources
 1. Explore and visualize the data

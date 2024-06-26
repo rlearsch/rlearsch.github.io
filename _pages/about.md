@@ -14,6 +14,10 @@ Learning to code for DoSER and polymer science got me excited to learn more abou
 
 Hosting a website is still pretty new to me! This page is under construction.
 
+### 2024-06-26
+
+Added a page for a small protein-peptide binding ML project.
+
 ### 2022-08-01
 
 I've added a link to dosertools and updated my CV
