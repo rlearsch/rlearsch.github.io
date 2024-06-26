@@ -7,13 +7,20 @@ redirect_from:
   - /about/
   - /about.html
 ---
-2022-06-19
+
+I am a "full stack" polymer scientist. I do synthesis, characterization, and physics of custom polymers and polymer solutions.\
+In 2020 I built an extensional rheometer (DoSER) and have written a [lot of code](https://github.com/rlearsch/dosertools) to improve and accelerate the measurement technique.\
+Learning to code for DoSER and polymer science got me excited to learn more about programming and data science in general, so I've started doing some personal projects which I post here as well.
 
 Hosting a website is still pretty new to me! This page is under construction.
 
-I am a "full stack" polymer scientist. I do synthesis, characterization, and physics of custom polymers and polymer solutions.\
-In 2020 I built an extensional rheometer (DOSER) <!--- link to Vivek's paper or website--> and have written a lot of code to improve and accelerate the measurement technique.\
-I also do personal coding projects. 
+### 2022-08-01
+
+I've added a link to dosertools and updated my CV
+
+### 2022-06-19
+
+Initial set up for this site. 
 
 <!---
 Commenting out the boilerplate that came with the set up 

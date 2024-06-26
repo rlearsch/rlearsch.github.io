@@ -83,7 +83,7 @@ author:
   name             : "Rob Learsch"
   avatar           : "profile.jpg"
   bio              : "Current Polymer Scientist | Aspiring Data Scientist | Cross-functional Collaborator"
-  location         : "Pasadena, CA | Willing to relocate"
+  location         : "Pasadena, CA | \n Willing to relocate"
   employer         :
 #  pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   googlescholar    : "https://scholar.google.com/citations?user=XDL21yAyaOsC&hl"
@@ -97,6 +97,7 @@ author:
   facebook         :
   foursquare       :
   github           : "rlearsch"
+  #github: [metadata]
   google_plus      :
   keybase          :
   instagram        :
@@ -175,7 +176,7 @@ kramdown:
 
 # Collections
 collections:
-  teaching:
+  polymer:
     output: true
     permalink: /:collection/:path/
   publications:
