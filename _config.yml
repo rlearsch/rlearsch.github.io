@@ -10,7 +10,7 @@ locale                   : "en-US"
 title                    : "Rob Learsch"
 title_separator          : "-"
 name                     : &name "Rob Learsch"
-description              : &description "Current Polymer Scientist | Data Scientist | Cross-functional Collaborator"
+description              : &description "Polymer Scientist | Data Scientist | Cross-functional Collaborator"
 url                      : https://rlearsch.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "rlearsch.github.io"
@@ -82,7 +82,7 @@ analytics:
 author:
   name             : "Rob Learsch"
   avatar           : "profile.jpg"
-  bio              : "Current Polymer Scientist | Data Scientist | Cross-functional Collaborator"
+  bio              : "Polymer Scientist | Data Scientist | Cross-functional Collaborator"
   location         : "San Francisco, CA"
   employer         :
 #  pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
