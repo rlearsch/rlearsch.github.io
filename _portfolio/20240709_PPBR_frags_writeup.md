@@ -74,7 +74,7 @@ y_train, y_valid, y_test = training['Y'].to_frame(), valid['Y'].to_frame(), test
 ```
 
 ### Chemical properties
-From RDKit, built it
+From RDKit, there are built in molecular descriptions. 
 
 
 ```python
@@ -787,8 +787,8 @@ plt.show()
 Transforming the data into a normal distribution helps train the model
 
 ### Morgan fingerprinting 
-Another type of data to use is a more direct comparison between molecules: molecular fingerprints
-These look at atoms near to one another within the molecule. These fingerprints can be used to compare molecules to one another in the dataset and judge similarity
+Another type of data to use is a more direct comparison between molecules: molecular fingerprints.
+These look at atoms near to one another within the molecule. These fingerprints can be used to compare molecules to one another in the dataset and judge similarity.
 
 
 ```python
