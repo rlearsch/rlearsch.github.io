@@ -1165,10 +1165,7 @@ for admet_benchmark in [list(benchmark_config.keys())[0]]:
 
 As of 2024/07/09, this is a first place score on the [leaderboard](https://tdcommons.ai/benchmark/admet_group/08ppbr/)!
 
-The current leader is 
-|Model |Contact	| Link | 	#Params 	| MAE | 
-|---|---|---|---|---|
-|MapLight + GNN| 	Jim Notwell| 	GitHub, Paper| 	N/A| 	7.526 ± 0.106| 
+The current leader is: MapLight + GNN, Jim Notwell, 7.526 ± 0.106
 
 
 ```python
