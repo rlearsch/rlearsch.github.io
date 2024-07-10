@@ -712,7 +712,7 @@ plt.show()
 
 
     
-![png](/images/PPBR/output_17_0.png)
+![png](/images/PPBR/output_15_0.png)
     
 
 
@@ -724,7 +724,7 @@ plt.show()
 
 
     
-![png](/images/PPBR/output_18_0.png)
+![png](/images/PPBR/output_16_0.png)
     
 
 
@@ -768,7 +768,7 @@ plt.show()
 
 
     
-![png](/images/PPBR/output_22_0.png)
+![png](/images/PPBR/output_20_0.png)
     
 
 
@@ -780,7 +780,7 @@ plt.show()
 
 
     
-![png](/images/PPBR/output_23_0.png)
+![png](/images/PPBR/output_21_0.png)
     
 
 
@@ -896,13 +896,14 @@ regr = GradientBoostingRegressor(
     random_state=1, 
     )
 regr.fit(X_train, y_train)
+training_score, validation_score = regr.score(X_train, y_train), regr.score(X_valid, y_valid)
 f"Training score: {training_score:.2f}, Validation score: {validation_score:.2f}"
 ```
 
 
 
 
-    'Training score: 0.81, Validation score: 0.47'
+    'Training score: 0.81, Validation score: 0.15'
 
 
 
@@ -921,10 +922,11 @@ regr = GradientBoostingRegressor(
     random_state=1, 
     )
 regr.fit(X_train, y_train)
+training_score, validation_score = regr.score(X_train, y_train), regr.score(X_valid, y_valid)
 print(f'Training score: {training_score:.2f}, Validation score: {validation_score:.2f}')
 ```
 
-    Training score: 0.81, Validation score: 0.47
+    Training score: 0.87, Validation score: 0.36
 
 
 ### Determine the right radius to use 
@@ -1062,10 +1064,11 @@ regr = GradientBoostingRegressor(
 random_state=1, 
 )
 regr.fit(X_train_scaled, y_train_scaled)
+training_score, validation_score = regr.score(X_train_scaled, y_train_scaled), regr.score(X_validation_scaled, y_validation_scaled)
 print(f'Training score: {training_score:.2f}, Validation score: {validation_score:.2f}')
 ```
 
-    Training score: 0.81, Validation score: 0.47
+    Training score: 0.83, Validation score: 0.44
 
 
 Comapred to where we started (validation score = 0.38) this is a moderate improvement. Let's submit!
@@ -1153,7 +1156,7 @@ for admet_benchmark in [list(benchmark_config.keys())[0]]:
 ```
 
     Found local copy...
-    100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [10:34<00:00, 126.99s/it]
+    100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [10:37<00:00, 127.51s/it]
 
     
     
@@ -1165,7 +1168,10 @@ for admet_benchmark in [list(benchmark_config.keys())[0]]:
 
 As of 2024/07/09, this is a first place score on the [leaderboard](https://tdcommons.ai/benchmark/admet_group/08ppbr/)!
 
-The current leader is: MapLight + GNN, Jim Notwell, 7.526 ± 0.106
+The current leader is 
+|Model |Contact	| Link | 	#Params 	| MAE | 
+|---|---|---|---|---|
+|MapLight + GNN| 	Jim Notwell| 	GitHub, Paper| 	N/A| 	7.526 ± 0.106| 
 
 
 ```python
