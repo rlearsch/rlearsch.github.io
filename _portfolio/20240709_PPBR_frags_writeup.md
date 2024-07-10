@@ -1,6 +1,6 @@
 ---
 title: "Plasma Protein Binding Rate"
-excerpt: "Regression based on a dataset of 1,614 drugs from AstraZeneca. <br/> The human plasma protein binding rate (PPBR) is expressed as the percentage of a drug bound to plasma proteins in the blood. This rate strongly affect a drug's efficiency of delivery. The less bound a drug is, the more efficiently it can traverse and diffuse to the site of actions. From a ChEMBL assay deposited by AstraZeneca. <br/><img src='/images/protein-peptide/thumbnail.PNG' width='533' height='300'>"
+excerpt: "Regression based on a dataset of 1,614 drugs from AstraZeneca. <br/> The human plasma protein binding rate (PPBR) is expressed as the percentage of a drug bound to plasma proteins in the blood. This rate strongly affect a drug's efficiency of delivery. The less bound a drug is, the more efficiently it can traverse and diffuse to the site of actions. From a ChEMBL assay deposited by AstraZeneca. <br/><img src='/images/PPBR/thumbnail.jpg' width='533' height='300'>"
 collection: portfolio
 ---
 ```python
@@ -1169,8 +1169,3 @@ for admet_benchmark in [list(benchmark_config.keys())[0]]:
 As of 2024/07/09, this is a first place score on the [leaderboard](https://tdcommons.ai/benchmark/admet_group/08ppbr/)!
 
 The current leader is MapLight + GNN, Jim Notwell, 7.526 ± 0.106| 
-
-
-```python
-
-```
