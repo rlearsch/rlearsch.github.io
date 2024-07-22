@@ -12,6 +12,10 @@ I am a "full stack" polymer scientist. I do synthesis, characterization, and phy
 In 2020 I built an extensional rheometer (DoSER) and have written a [lot of code](https://github.com/rlearsch/dosertools) to improve and accelerate the measurement technique.\
 Learning to code for DoSER and polymer science got me excited to learn more about programming and data science in general, so I've started doing some personal projects which I post here as well.
 
+### 2024-07-21
+
+Added a write up on a Cell Effective Permeability modeling project. Currently a first place score on a leaderboard! 
+
 ### 2024-07-09
 
 Added a page on my Plasma Protein Binding ML project. This is currently the top score on the leaderboard!
